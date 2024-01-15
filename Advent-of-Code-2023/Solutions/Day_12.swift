@@ -1,5 +1,5 @@
 //
-//  Day12.swift
+//  Day_12.swift
 //  Advent-of-Code-2023
 //
 //  Created by Daniel Paten on 28/12/2023.
@@ -8,17 +8,14 @@
 import Foundation
 import Algorithms
 
-class Day12 {
-    static func part(partTwo: Bool) {
+class Day_12 {
+    static func p(input: [String], partTwo: Bool) throws -> Int {
         do {
-            // get the data from the input file
-            let lines = try InputReader.readFile(day: 12)
-            
             // variable init
             var sum = 0
             
             // format data
-            for line in lines {
+            for line in input {
                 let lineDiv = line.components(separatedBy: " ")
                 var springMap = lineDiv[0]
                 var springArr = lineDiv[1].components(separatedBy: ",")
@@ -66,7 +63,7 @@ class Day12 {
                     case "?":
                         sum = hash() + dot()
                     default:
-                        throw Day12Error.invalidSpring(spring: currSpring)
+                        throw Day_12_Error.invalid_spring(spring: currSpring)
                     }
                     
                     func hash() -> Int {
@@ -111,9 +108,9 @@ class Day12 {
                 sum += try memoisedSolver(springArr)
             }
             
-            print(sum)
+            return sum
         } catch {
-            print(error)
+            throw error
         }
     }
     
@@ -141,7 +138,7 @@ class Day12 {
     }
     
     // custom error handling
-    private enum Day12Error: Error {
-        case invalidSpring(spring: Character)
+    private enum Day_12_Error: Error {
+        case invalid_spring(spring: Character)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Day13.swift
+//  Day_13.swift
 //  Advent-of-Code-2023
 //
 //  Created by Daniel Paten on 6/1/2024.
@@ -7,18 +7,15 @@
 
 import Foundation
 
-class Day13 {
-    static func part(partTwo: Bool) {
+class Day_13 {
+    static func p(input: [String], partTwo: Bool) throws -> Int {
         do {
-            // get the data from the input file
-            let lines = try InputReader.readFile(day: 13)
-            
             // variable init
             var sum = 0
             var mirrorMap = [String]()
             
             // build each map or check reflection
-            for line in lines {
+            for line in input {
                 if line.isEmpty {
                     sum += try checkReflection(map: mirrorMap, partTwo: partTwo)
                     
@@ -32,9 +29,9 @@ class Day13 {
             // for the last map, as there's no empty line to trigger it
             sum += try checkReflection(map: mirrorMap, partTwo: partTwo)
             
-            print(sum)
+            return sum
         } catch {
-            print(error)
+            throw error
         }
     }
     
@@ -60,7 +57,7 @@ class Day13 {
         }
         
         // ensure reflection was found
-        guard count != 0 && (!partTwo || (horResult.1 || verResult.1)) else { throw Day13Error.reflectionNotFound(map: map) }
+        guard count != 0 && (!partTwo || (horResult.1 || verResult.1)) else { throw Day_13_Error.reflection_not_found(map: map) }
         return count
     }
     
@@ -108,7 +105,7 @@ class Day13 {
     }
     
     // custom error handling
-    private enum Day13Error: Error {
-        case reflectionNotFound(map: [String])
+    private enum Day_13_Error: Error {
+        case reflection_not_found(map: [String])
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Day15.swift
+//  Day_15.swift
 //  Advent-of-Code-2023
 //
 //  Created by Daniel Paten on 9/1/2024.
@@ -8,38 +8,33 @@
 import Foundation
 import Collections
 
-class Day15 {
-    static func partOne() {
-        do {
-            // get the data from the input file
-            let initSeq = try InputReader.readFile(day: 15).first!
-            let initSteps = initSeq.components(separatedBy: ",")
-            
-            // variable init
-            var sum = 0
-            
-            // iterate through steps with HASH algorithm
-            for step in initSteps {
-                var hashSum = 0
-                for char in step {
-                    hashSum += Int(char.asciiValue!)
-                    hashSum *= 17
-                    hashSum %= 256
-                }
-                sum += hashSum
+class Day_15 {
+    static func p1(input: [String]) -> Int {
+        // get the data from the input file
+        let initSeq = input.first!
+        let initSteps = initSeq.components(separatedBy: ",")
+        
+        // variable init
+        var sum = 0
+        
+        // iterate through steps with HASH algorithm
+        for step in initSteps {
+            var hashSum = 0
+            for char in step {
+                hashSum += Int(char.asciiValue!)
+                hashSum *= 17
+                hashSum %= 256
             }
-            
-            print(sum)
+            sum += hashSum
         }
-        catch {
-            print(error)
-        }
+        
+        return sum
     }
     
-    static func partTwo() {
+    static func p2(input: [String]) throws -> Int {
         do {
             // get the data from the input file
-            let initSeq = try InputReader.readFile(day: 15).first!
+            let initSeq = input.first!
             let initSteps = initSeq.components(separatedBy: ",")
             
             // variable init
@@ -78,7 +73,7 @@ class Day15 {
                 case "-":
                     boxDict[hashSum]?.removeValue(forKey: lens)
                 default:
-                    throw Day15Error.invalidOperation(operation: operation)
+                    throw Day_15_Error.invalid_operation(operation: operation)
                 }
             }
             
@@ -89,15 +84,15 @@ class Day15 {
                 }
             }
             
-            print(sum)
+            return sum
         }
         catch {
-            print(error)
+            throw error
         }
     }
     
     // custom error handling
-    private enum Day15Error: Error {
-        case invalidOperation(operation: Character)
+    private enum Day_15_Error: Error {
+        case invalid_operation(operation: Character)
     }
 }

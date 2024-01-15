@@ -1,5 +1,5 @@
 //
-//  Day8.swift
+//  Day_8.swift
 //  Advent-of-Code-2023
 //
 //  Created by Daniel Paten on 21/12/2023.
@@ -8,31 +8,25 @@
 import Foundation
 import Algorithms
 
-class Day8 {
-    static func partOne() {
+class Day_8 {
+    static func p1(input: [String]) throws -> Int {
         do {
-            // get the data from the input file
-            let lines = try InputReader.readFile(day: 8)
-            
             // variable init
-            var status = 0
+            var mappedDirections = false
             var sum = 0
             var directions = [String]()
             var nodes: [String : [String]] = [:]
             
             // iterate over lines
-            for line in lines {
+            for line in input {
                 guard !line.isEmpty else { continue }
                 
-                switch status {
-                case 0:
+                if !mappedDirections {
                     directions = line.map{String($0)}
-                    status += 1
-                case 1:
+                    mappedDirections = true
+                } else {
                     let points = line.components(separatedBy: .alphanumerics.inverted).filter{!$0.isEmpty}
                     nodes[points[0]] = points.suffix(2)
-                default:
-                    throw Day8Error.invalidStatus(status: status)
                 }
             }
             
@@ -48,42 +42,36 @@ class Day8 {
                 case "R":
                     position = currentNode[1]
                 default:
-                    throw Day8Error.invalidDirection(direction: direction)
+                    throw Day_8_Error.invalid_direction(direction: direction)
                 }
                 sum += 1
                 if position == "ZZZ" { break }
             }
             
-            print(sum)
+            return sum
         } catch {
-            print(error)
+            throw error
         }
     }
     
-    static func partTwo() {
+    static func p2(input: [String]) throws -> Int {
         do {
-            // get the data from the input file
-            let lines = try InputReader.readFile(day: 8)
-            
             // variable init
-            var status = 0
+            var mappedDirections = false
             var sums: [Int]
             var directions = [String]()
             var nodes: [String : [String]] = [:]
             
             // iterate over lines
-            for line in lines {
+            for line in input {
                 guard !line.isEmpty else { continue }
                 
-                switch status {
-                case 0:
+                if !mappedDirections {
                     directions = line.map{String($0)}
-                    status += 1
-                case 1:
+                    mappedDirections = true
+                } else {
                     let points = line.components(separatedBy: .alphanumerics.inverted).filter{!$0.isEmpty}
                     nodes[points[0]] = points.suffix(2)
-                default:
-                    throw Day8Error.invalidStatus(status: status)
                 }
             }
             
@@ -101,7 +89,7 @@ class Day8 {
                     case "R":
                         positions[i] = currentNode[1]
                     default:
-                        throw Day8Error.invalidDirection(direction: direction)
+                        throw Day_8_Error.invalid_direction(direction: direction)
                     }
                     sums[i] += 1
                     if positions[i].hasSuffix("Z") { break }
@@ -112,9 +100,9 @@ class Day8 {
             let sumsInit = sums[0]
             let total = sums.dropFirst().reduce(sumsInit, lcm)
             
-            print(total)
+            return total
         } catch {
-            print(error)
+            throw error
         }
     }
     
@@ -132,8 +120,7 @@ class Day8 {
     }
     
     // custom error handling
-    private enum Day8Error: Error {
-        case invalidDirection(direction: String)
-        case invalidStatus(status: Int)
+    private enum Day_8_Error: Error {
+        case invalid_direction(direction: String)
     }
 }

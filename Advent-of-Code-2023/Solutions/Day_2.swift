@@ -1,5 +1,5 @@
 //
-//  Day2.swift
+//  Day_2.swift
 //  Advent-of-Code-2023
 //
 //  Created by Daniel Paten on 13/12/2023.
@@ -7,18 +7,15 @@
 
 import Foundation
 
-class Day2 {
-    static func partOne() {
+class Day_2 {
+    static func p1(input: [String]) throws -> Int {
         do {
-            // get the data from the input file
-            let lines = try InputReader.readFile(day: 2)
-            
             // variable init
             var sum = 0
             let maxCubeNums = [12, 13, 14] // rgb
             
             // iterate over lines
-            for line in lines {
+            for line in input {
                 
                 // separate games with game numbers
                 let game = line.components(separatedBy: [";", ":"])
@@ -44,7 +41,7 @@ class Day2 {
                         case "e":
                             currentGameMax[2] = max(colourNum, currentGameMax[2])
                         default:
-                            throw Day2Error.invalidColour(colour: colour)
+                            throw Day_2_Error.invalid_colour(colour: colour)
                         }
                     }
                 }
@@ -54,22 +51,19 @@ class Day2 {
                     sum += gameNum
                 }
             }
-            print(sum)
+            return sum
         } catch {
-            print(error)
+            throw error
         }
     }
     
-    static func partTwo() {
+    static func p2(input: [String]) throws -> Int {
         do {
-            // get the data from the input file
-            let lines = try InputReader.readFile(day: 2)
-            
             // variable init
             var sum = 0
             
             // iterate over lines
-            for line in lines {
+            for line in input {
                 
                 // separate games with game numbers
                 let game = line.components(separatedBy: [";", ":"])
@@ -94,7 +88,7 @@ class Day2 {
                         case "e":
                             currentGameMax[2] = max(colourNum, currentGameMax[2])
                         default:
-                            throw Day2Error.invalidColour(colour: colour)
+                            throw Day_2_Error.invalid_colour(colour: colour)
                         }
                     }
                 }
@@ -103,14 +97,14 @@ class Day2 {
                 let powerNum = currentGameMax[0] * currentGameMax[1] * currentGameMax[2]
                 sum += powerNum
             }
-            print(sum)
+            return sum
         } catch {
-            print(error)
+            throw error
         }
     }
     
     // custom error handling
-    private enum Day2Error: Error {
-        case invalidColour(colour: String)
+    private enum Day_2_Error: Error {
+        case invalid_colour(colour: String)
     }
 }
