@@ -33,11 +33,8 @@ class Day_10 {
                 }
             }
             
-            // copy of the map to fill in
-            var colouredMap = pipeMap
-            
             // start flood fill
-            let total = try floodFill(map: pipeMap, coloured: &colouredMap, xStart: startPos[0], yStart: startPos[1], xSize: xSize, ySize: ySize, partTwo: partTwo)
+            let total = try floodFill(map: pipeMap, xStart: startPos[0], yStart: startPos[1], xSize: xSize, ySize: ySize, partTwo: partTwo)
             
             return total
         } catch {
@@ -46,13 +43,14 @@ class Day_10 {
     }
     
     // credit geeksforgeeks.org
-    private static func floodFill(map: [[String]], coloured: inout [[String]], xStart: Int, yStart: Int, xSize: Int, ySize: Int, partTwo: Bool) throws -> Int {
+    private static func floodFill(map: [[String]], xStart: Int, yStart: Int, xSize: Int, ySize: Int, partTwo: Bool) throws -> Int {
         // variable init
         var queue = [(Int, Int, Int)]()
         let filled = "#"
         var xCoords = [Int]()
         var yCoords = [Int]()
         var highestStep = 0
+        var coloured = map
         
         // append the position of starting pixel of the component
         queue.append((xStart, yStart, 0))
