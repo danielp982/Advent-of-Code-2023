@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Algorithms
 
 class Day_16 {
     static func p1(input: [String]) throws -> Int {
@@ -30,8 +31,48 @@ class Day_16 {
         }
     }
     
-    static func p2(input: [String]) -> Int {
-        return 0
+    static func p2(input: [String]) throws -> Int {
+        do {
+            var beamMap = [[String]]()
+            
+            // separate components of text into a 2D array (for loop used instead of reduce due to readability)
+            for line in input {
+                beamMap.append(line.map{String($0)})
+            }
+            
+            // dimensions & starting coordinate
+            let ySize = beamMap.count
+            let xSize = beamMap[0].count
+            var total = 0
+            
+            // start flood fill
+            for (point, direction) in product(0..<ySize, Direction.allCases) {
+                var xStart = 0
+                var yStart = 0
+                
+                switch direction {
+                case .up:
+                    xStart = point
+                    yStart = ySize-1
+                case .down:
+                    xStart = point
+                    yStart = 0
+                case .left:
+                    xStart = xSize-1
+                    yStart = point
+                case .right:
+                    xStart = 0
+                    yStart = point
+                }
+                
+                let temp = try floodFill(map: beamMap, xStart: xStart, yStart: yStart, xSize: xSize, ySize: ySize, initDir: direction)
+                if temp > total { total = temp }
+            }
+            
+            return total
+        } catch {
+            throw error
+        }
     }
     
     private static func floodFill(map: [[String]], xStart: Int, yStart: Int, xSize: Int, ySize: Int, initDir: Direction) throws -> Int {
@@ -132,7 +173,7 @@ class Day_16 {
         return visitedCoords.count
     }
     
-    private enum Direction {
+    private enum Direction: CaseIterable {
         case up, down, left, right
     }
     

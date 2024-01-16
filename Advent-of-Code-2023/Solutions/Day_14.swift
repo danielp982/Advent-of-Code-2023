@@ -39,7 +39,7 @@ class Day_14 {
         var loadMap = input
         
         // run spin cycles
-        for direction in [Direction.north, .west, .south, .east].cycled() {
+        for direction in Direction.allCases.cycled() {
             loadMap = rotateAndSort(loadMap: loadMap)
             
             // check if this north direction is repeating
@@ -92,7 +92,7 @@ class Day_14 {
         return newMap
     }
     
-    private enum Direction {
+    private enum Direction: CaseIterable {
         case north, west, south, east
     }
 }
