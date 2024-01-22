@@ -13,7 +13,7 @@ enum AoC_Error: Error {
 }
 
 // TO UPDATE PER RUN
-let day = 16
+let day = 18
 let p1 = false
 
 do {
@@ -38,25 +38,29 @@ do {
     case 6:
         result = p1 ? Day_6.p1(input: input) : Day_6.p2(input: input)
     case 7:
-        result = p1 ? Day_7.p(input: input, partTwo: false) : Day_7.p(input: input, partTwo: true)
+        result = Day_7.p(input: input, partOne: p1)
     case 8:
         result = p1 ? try Day_8.p1(input: input) : try Day_8.p2(input: input)
     case 9:
         result = p1 ? Day_9.p1(input: input) : Day_9.p2(input: input)
     case 10:
-        result = p1 ? try Day_10.p(input: input, partTwo: false) : try Day_10.p(input: input, partTwo: true)
+        result = try Day_10.p(input: input, partOne: p1)
     case 11:
         result = p1 ? Day_11.p1(input: input) : Day_11.p2(input: input)
     case 12:
-        result = p1 ? try Day_12.p(input: input, partTwo: false) : try Day_12.p(input: input, partTwo: true)
+        result = try Day_12.p(input: input, partOne: p1)
     case 13:
-        result = p1 ? try Day_13.p(input: input, partTwo: false) : try Day_13.p(input: input, partTwo: true)
+        result = try Day_13.p(input: input, partOne: p1)
     case 14:
         result = p1 ? Day_14.p1(input: input) : Day_14.p2(input: input)
     case 15:
         result = p1 ? Day_15.p1(input: input) : try Day_15.p2(input: input)
     case 16:
         result = p1 ? try Day_16.p1(input: input) : try Day_16.p2(input: input)
+    case 17:
+        result = p1 ? Day_17.p1(input: input) : Day_17.p2(input: input)
+    case 18:
+        result = try Day_18.p(input: input, partOne: p1)
     default:
         throw AoC_Error.invalid_day(day: day)
     }

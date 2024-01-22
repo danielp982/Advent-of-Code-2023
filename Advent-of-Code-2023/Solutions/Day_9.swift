@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Day_9 {
+struct Day_9 {
     static func p1(input: [String]) -> Int {
         // variable init
         var sum = 0
@@ -20,10 +20,10 @@ class Day_9 {
             
             // work backwards
             repeat {
-                var prevElement = -999
+                var prevElement = Int.min
                 // repeatedly get the distances between the arrays and add to allHistories
                 let newHistory = allHistories.last!.reduce(into: [Int](), {
-                    if prevElement != -999 {
+                    if prevElement != Int.min {
                         $0.append($0.distance(from: prevElement, to: $1))
                     }
                     prevElement = $1
@@ -62,10 +62,10 @@ class Day_9 {
             
             // work backwards
             repeat {
-                var prevElement = -999
+                var prevElement = Int.min
                 // repeatedly get the distances between the arrays and add to allHistories
                 let newHistory = allHistories.last!.reduce(into: [Int](), {
-                    if prevElement != -999 {
+                    if prevElement != Int.min {
                         $0.append($0.distance(from: $1, to: prevElement))
                     }
                     prevElement = $1

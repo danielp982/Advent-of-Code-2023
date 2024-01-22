@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Day_3 {
+struct Day_3 {
     static func p1(input: [String]) -> Int {
         // variable init
         var sum = 0

@@ -8,7 +8,7 @@
 import Foundation
 import Collections
 
-class Day_15 {
+struct Day_15 {
     static func p1(input: [String]) -> Int {
         // get the data from the input file
         let initSeq = input.first!

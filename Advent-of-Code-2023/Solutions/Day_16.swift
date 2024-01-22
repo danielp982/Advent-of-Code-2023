@@ -8,7 +8,7 @@
 import Foundation
 import Algorithms
 
-class Day_16 {
+struct Day_16 {
     static func p1(input: [String]) throws -> Int {
         do {
             var beamMap = [[String]]()

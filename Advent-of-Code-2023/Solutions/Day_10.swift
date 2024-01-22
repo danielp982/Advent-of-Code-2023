@@ -8,8 +8,8 @@
 import Foundation
 import Algorithms
 
-class Day_10 {
-    static func p(input: [String], partTwo: Bool) throws -> Int {
+struct Day_10 {
+    static func p(input: [String], partOne: Bool) throws -> Int {
         do {
             var pipeMap = [[String]]()
             
@@ -34,7 +34,7 @@ class Day_10 {
             }
             
             // start flood fill
-            let total = try floodFill(map: pipeMap, xStart: startPos[0], yStart: startPos[1], xSize: xSize, ySize: ySize, partTwo: partTwo)
+            let total = try floodFill(map: pipeMap, xStart: startPos[0], yStart: startPos[1], xSize: xSize, ySize: ySize, partOne: partOne)
             
             return total
         } catch {
@@ -43,7 +43,7 @@ class Day_10 {
     }
     
     // credit geeksforgeeks.org
-    private static func floodFill(map: [[String]], xStart: Int, yStart: Int, xSize: Int, ySize: Int, partTwo: Bool) throws -> Int {
+    private static func floodFill(map: [[String]], xStart: Int, yStart: Int, xSize: Int, ySize: Int, partOne: Bool) throws -> Int {
         // variable init
         var queue = [(Int, Int, Int)]()
         let filled = "#"
@@ -54,7 +54,7 @@ class Day_10 {
         
         // append the position of starting pixel of the component
         queue.append((xStart, yStart, 0))
-        if partTwo {
+        if !partOne {
             xCoords.append(xStart)
             yCoords.append(yStart)
         }
@@ -64,10 +64,10 @@ class Day_10 {
             
             // dequeue the front node
             var currPixel: (Int, Int, Int)
-            if partTwo {
-                currPixel = queue.removeLast()
-            } else {
+            if partOne {
                 currPixel = queue.removeFirst()
+            } else {
+                currPixel = queue.removeLast()
             }
             
             // get current coords and object
@@ -84,7 +84,7 @@ class Day_10 {
                 // right
                 coloured[posY][posX + 1] = filled
                 queue.append((posX + 1, posY, stepCount + 1))
-                if partTwo {
+                if !partOne {
                     xCoords.append(posX + 1)
                     yCoords.append(posY)
                 }
@@ -94,7 +94,7 @@ class Day_10 {
                 // left
                 coloured[posY][posX - 1] = filled
                 queue.append((posX - 1, posY, stepCount + 1))
-                if partTwo {
+                if !partOne {
                     xCoords.append(posX - 1)
                     yCoords.append(posY)
                 }
@@ -104,7 +104,7 @@ class Day_10 {
                 // up
                 coloured[posY - 1][posX] = filled
                 queue.append((posX, posY - 1, stepCount + 1))
-                if partTwo {
+                if !partOne {
                     xCoords.append(posX)
                     yCoords.append(posY - 1)
                 }
@@ -114,16 +114,16 @@ class Day_10 {
                 // down
                 coloured[posY + 1][posX] = filled
                 queue.append((posX, posY + 1, stepCount + 1))
-                if partTwo {
+                if !partOne {
                     xCoords.append(posX)
                     yCoords.append(posY + 1)
                 }
             }
         }
-        if partTwo {
-            return shoelace(xCoords: xCoords, yCoords: yCoords)
-        } else {
+        if partOne {
             return highestStep
+        } else {
+            return shoelace(xCoords: xCoords, yCoords: yCoords)
         }
     }
     

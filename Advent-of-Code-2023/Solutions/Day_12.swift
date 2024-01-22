@@ -8,8 +8,8 @@
 import Foundation
 import Algorithms
 
-class Day_12 {
-    static func p(input: [String], partTwo: Bool) throws -> Int {
+struct Day_12 {
+    static func p(input: [String], partOne: Bool) throws -> Int {
         do {
             // variable init
             var sum = 0
@@ -21,7 +21,7 @@ class Day_12 {
                 var springArr = lineDiv[1].components(separatedBy: ",")
                 
                 // 5x the size for part two
-                if partTwo {
+                if !partOne {
                     springMap = String.init(repeating: springMap+"?", count: 5)
                     springMap = String(springMap.dropLast())
                     springArr = Array(repeating: springArr, count: 5).flatMap{$0}

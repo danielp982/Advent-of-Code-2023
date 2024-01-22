@@ -8,7 +8,7 @@
 import Foundation
 import Algorithms
 
-class Day_11 {
+struct Day_11 {
     static func p1(input: [String]) -> Int {
         // variable init
         var starMap = [[String]]()

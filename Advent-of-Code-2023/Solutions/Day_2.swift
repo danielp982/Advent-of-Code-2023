@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Day_2 {
+struct Day_2 {
     static func p1(input: [String]) throws -> Int {
         do {
             // variable init

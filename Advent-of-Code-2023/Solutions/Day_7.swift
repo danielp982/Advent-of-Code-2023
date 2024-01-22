@@ -8,8 +8,8 @@
 import Foundation
 import Algorithms
 
-class Day_7 {
-    static func p(input: [String], partTwo: Bool) -> Int {
+struct Day_7 {
+    static func p(input: [String], partOne: Bool) -> Int {
         // variable init
         var hands = [String]()
         var handBids: [String:Int] = [:]
@@ -25,7 +25,7 @@ class Day_7 {
         }
         
         // sort the hands using the custom function
-        hands.sort(by: {sortHand(lhs: $0, rhs: $1, partTwo: partTwo)} )
+        hands.sort(by: {sortHand(lhs: $0, rhs: $1, partOne: partOne)} )
         hands.reverse() // easier to sum this way
         
         // sum up the score
@@ -37,12 +37,12 @@ class Day_7 {
     }
     
     // sorting function for the cards
-    private static func sortHand(lhs: String, rhs: String, partTwo: Bool) -> Bool {
+    private static func sortHand(lhs: String, rhs: String, partOne: Bool) -> Bool {
         // init variables
         let handsComp = [lhs, rhs]
         var hsWinType: [WinType] = [.highCard, .highCard]
         var cardDic: [String : Cards] = ["2": .two, "3": .three, "4": .four, "5": .five, "6": .six, "7": .seven, "8": .eight, "9": .nine, "T": .ten, "Q": .queen, "K": .king, "A": .ace]
-        if partTwo { cardDic["J"] = .joker } else { cardDic["J"] = .jack }
+        if partOne { cardDic["J"] = .jack } else { cardDic["J"] = .joker }
         
         for hs in 0...1 {
             
@@ -50,7 +50,7 @@ class Day_7 {
             var cardCount = handsComp[hs].reduce(into: [:], { $0[$1, default: 0] += 1 })
             
             // deal with the jokers in part two
-            if partTwo {
+            if !partOne {
                 if (cardCount["J"] != nil) {
                     let jValue = cardCount["J"]!
                     cardCount.removeValue(forKey: "J")

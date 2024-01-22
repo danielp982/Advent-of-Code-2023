@@ -8,7 +8,7 @@
 import Foundation
 import Algorithms
 
-class Day_8 {
+struct Day_8 {
     static func p1(input: [String]) throws -> Int {
         do {
             // variable init

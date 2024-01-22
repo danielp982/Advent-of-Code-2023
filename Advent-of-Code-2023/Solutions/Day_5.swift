@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Day_5 {
+struct Day_5 {
     static func p1(input: [String]) -> Int {
         // Dictionary initialisation to store all the mappings
         var seeds = [String]()

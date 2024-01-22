@@ -8,7 +8,7 @@
 import Foundation
 import Algorithms
 
-class Day_1 {
+struct Day_1 {
     static func p1(input: [String]) -> Int {
         // variable init
         var sum = 0
