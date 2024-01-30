@@ -14,7 +14,7 @@ enum AoC_Error: Error {
 
 // TO UPDATE PER RUN
 let day = 19
-let p1 = true
+let p1 = false
 
 do {
     let input = try InputReader.readFile(day: day)
